@@ -16,21 +16,21 @@ $('.js-dog-button').click(function() {
 });
 
 */
-var img = $('<img class="dog-img" src="" />');
-$(document.body).append(img);
+var img = $('<img class="dog-img" src="" />'); // define image to use
+$(document.body).append(img); // append image to screen (no source is set yet)
 
-$.get("https://dog.ceo/api/breeds/list")
-    .then(function(data) {
-        data.message.forEach(function(currentBreed) {
-            $('.js-dog-breed').append(`<option val="${currentBreed}"> ${currentBreed} </option>`); // use tilda
+$.get("https://dog.ceo/api/breeds/list") // load the breed
+    .then(function(data) { //promise - after the breed is loaded, then do this function
+        data.message.forEach(function(currentBreed) { // iterate through breed list
+            $('.js-dog-breed').append(`<option val="${currentBreed}"> ${currentBreed} </option>`); // append an option for the select drop down list. use tilda `
         })
     
 });
 
-$('.js-dog-breed').change(function() {
-    $.get(`https://dog.ceo/api/breed/${this.value}/images/random`) //replace url breed/xxx/images/random with ${this.value} 
-        .then(function(data) {
-            img.attr('src', data.message);
+$('.js-dog-breed').change(function() { // add change event listener when breed is selected
+    $.get(`https://dog.ceo/api/breed/${this.value}/images/random`) // replace url breed/xxx/images/random with ${this.value} 
+        .then(function(data) { // promise 
+            img.attr('src', data.message); // set img attribute
         })
 });
 
